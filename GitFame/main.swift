@@ -150,7 +150,7 @@ fileprivate enum GFError: Error {
         case FoundationError(let error):
             print(message + "\(error.localizedDescription)")
         case .InvalidArguments:
-            print(message + "The GitHub username is missing.")
+            print(message + "The GitHub username is missing. Example: 'gitfame myGitHubUsername'")
         case .InvalidURL(let urlString):
             print(message + "The following GitHub url could not be reached: \(urlString)")
         case .MissingJSON(let urlString):
