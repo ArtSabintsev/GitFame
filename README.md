@@ -1,6 +1,8 @@
 # GitFame
 A Swift CLI that logs your GitHub Stars and Forks.
 
+## Warning
+Ths tool pings GitHub's API without authenticaiton, so the end-user will be rate-limited at 60 requests/hour.
 
 ## Commands
 ### Current
