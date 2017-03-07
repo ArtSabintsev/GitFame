@@ -18,6 +18,7 @@ fileprivate struct GitFame {
 
     @discardableResult
     init(arguments: [String]) throws {
+        print("... Welcome to GitFame! ...")
         guard arguments.count == 2 else {
             throw GFError.InvalidArguments
         }
