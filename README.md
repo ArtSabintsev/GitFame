@@ -5,12 +5,7 @@ A Swift CLI that logs your GitHub Stars and Forks.
 Ths tool pings GitHub's API without authenticaiton, so the end-user will be rate-limited at 60 requests/hour.
 
 ## Commands
-### Current
-```
-$swift main.swift <<GitHub Username>>
-```
-
-### Future Homebrew Support (hopefully)
+In the root directory, run `make` to install `gitfame` to `/usr/local/bin`.
 ```
 $gitfame <<GitHub Username>>
 ```
