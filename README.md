@@ -5,13 +5,13 @@ A Swift CLI that logs your GitHub Stars and Forks.
 ## Commands
 
 ```
-gitfame <<GitHub Username>>
+$gitfame <<GitHub Username>>
 ```
 
 ## Example
 
 ```
-gitfame artsabintsev
+$gitfame artsabintsev
 ... Fetching Stars (★) and Forks (⑂) for GitHub user (artsabintsev) on 2017-03-07 06:52:21 +0000 ...
 
 artsabintsev has 6364 ★ and 640 ⑂
