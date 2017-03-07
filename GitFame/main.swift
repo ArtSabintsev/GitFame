@@ -23,7 +23,7 @@ fileprivate struct GitFame {
         }
 
         username = arguments[1]
-        print("... Fetching Stars (\(GFConstants.starUnicode)) and Forks (\(GFConstants.forkUnicode)) for GitHub user (\(username)) ...\n")
+        print("... Fetching Stars (\(GFConstants.starUnicode)) and Forks (\(GFConstants.forkUnicode)) for GitHub user (\(username)) on \(Date()) ...\n")
         fetch()
     }
 }
