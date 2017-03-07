@@ -45,8 +45,8 @@ private extension GitFame {
         }
 
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10)
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
+
             if let error = error {
                 GFError.log(error: .FoundationError(error: error))
             }
@@ -73,7 +73,7 @@ private extension GitFame {
         }
 
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10)
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
+        URLSession.shared.dataTask(with: request) { (data, _, error) in
 
             if let error = error {
                 GFError.log(error: .FoundationError(error: error))
@@ -114,7 +114,7 @@ private extension GitFame {
         let stars = slimRepos.flatMap({ $0.stars }).reduce(0, +)
         let forks = slimRepos.flatMap({ $0.forks }).reduce(0, +)
 
-        print("\(username) has \(stars) \u{2605} and \(forks) \u{2442}\n")
+        print("\(username) has \(stars) \(GFConstants.starUnicode) and \(forks) \(GFConstants.forkUnicode)\n")
 
         printAll(using: slimRepos)
 
@@ -131,7 +131,7 @@ private extension GitFame {
         for repo in repos {
             var name = repo.name
             repeat { name.insert(" ", at: name.endIndex) } while name.characters.count < length + 10
-            print("\(name)\(repo.stars) \u{2605} / \(repo.forks) \u{2442}")
+            print("\(name)\(repo.stars) \(GFConstants.starUnicode) / \(repo.forks) \(GFConstants.forkUnicode)")
         }
     }
 }
