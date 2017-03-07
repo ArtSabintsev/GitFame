@@ -3,7 +3,12 @@ A Swift CLI that logs your GitHub Stars and Forks.
 
 
 ## Commands
+### Current
+```
+$swift main.swift <<GitHub Username>>
+```
 
+### Future Homebrew Support (hopefully)
 ```
 $gitfame <<GitHub Username>>
 ```
@@ -11,7 +16,7 @@ $gitfame <<GitHub Username>>
 ## Example
 
 ```
-$gitfame artsabintsev
+$swift main.swift artsabintsev
 ... Welcome to GitFame! ...
 ... Fetching Stars (★) and Forks (⑂) for GitHub user (artsabintsev) on 2017-03-07 14:22:22 +0000 ...
 
