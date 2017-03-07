@@ -2,7 +2,7 @@
 A Swift CLI that logs your GitHub Stars and Forks.
 
 ## Note
-This tool performs **2** requests to GitHub's API without authentication. The end-user will be rate-limited at 60 requests/hour.
+This tool performs **2** requests to GitHub's API without authentication. The end-user will be rate-limited at 60 reqs/hr.
 
 ## Installation
 - Run `make` to install `gitfame` to `/usr/local/bin`.
