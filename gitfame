@@ -25,7 +25,7 @@ fileprivate struct GitFame {
         }
 
         username = arguments[1]
-        print("... Fetching Stars (\(GFConstants.starUnicode)) and Forks (\(GFConstants.forkUnicode)) for GitHub user (\(username)) on \(Date()) ...\n")
+        print("... Fetching Stars (\(GFConstants.starUnicode)) and Forks (\(GFConstants.forkUnicode)) for GitHub user (\(username)) on \(formattedDate()) ...\n")
         fetch()
     }
 }
@@ -120,6 +120,13 @@ private extension GitFame {
         printAll(using: slimRepos)
 
         GFSemaphore.signal()
+    }
+
+    func formattedDate() -> String {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "MMM d, y h:mm:ss a"
+        dateformatter.timeZone = TimeZone.current
+        return dateformatter.string(from: Date())
     }
 
     func printAll(using repos: [SlimRepository]) {
