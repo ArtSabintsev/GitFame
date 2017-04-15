@@ -1,5 +1,5 @@
 # GitFame
-A Swift CLI that logs your GitHub Stars and Forks.
+A Swift CLI script that logs your GitHub Stars and Forks.
 
 ## Note
 This tool performs **2** requests to GitHub's API without authentication. The end-user will be rate-limited at 60 reqs/hr.
