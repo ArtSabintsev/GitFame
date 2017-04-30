@@ -14,6 +14,8 @@ $gitfame <GitHub_Username>
 
 ## Example
 
+For a colorized exampled, see [this image](https://cloud.githubusercontent.com/assets/854860/25561427/62f25b32-2d39-11e7-9b5e-49c969dc9c02.png).
+
 ```
 $gitfame artsabintsev
 ... Welcome to GitFame! ...
