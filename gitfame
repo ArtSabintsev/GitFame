@@ -19,13 +19,13 @@ fileprivate struct GitFame {
 
     @discardableResult
     init(arguments: [String]) throws {
-        print("... Welcome to GitFame! ...")
+        print("... Welcome to \(GFColorConstants.cyan)GitFame\(GFColorConstants.close)! ...")
         guard arguments.count == 2 else {
             throw GFError.InvalidArguments
         }
 
         username = arguments[1]
-        print("... Fetching Stars (\(GFConstants.starUnicode)) and Forks (\(GFConstants.forkUnicode)) for GitHub user (\(username)) on \(formattedDate()) ...\n")
+        print("... Fetching Stars \(GFColorConstants.yellow)(\(GFGeneralConstants.starUnicode))\(GFColorConstants.close) and Forks \(GFColorConstants.green)(\(GFGeneralConstants.forkUnicode))\(GFColorConstants.close) for GitHub user \(GFColorConstants.blue)(\(username))\(GFColorConstants.close) on \(formattedDate()) ...\n")
         fetch()
     }
 }
@@ -58,7 +58,7 @@ private extension GitFame {
 
             guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                 let repos = json,
-                let repCount = repos[GFConstants.publicRepos] as? Int else {
+                let repCount = repos[GFJSONConstants.publicRepos] as? Int else {
                 return GFError.log(error: .MalformedJSON(urlString: urlString))
             }
 
@@ -95,15 +95,15 @@ private extension GitFame {
 
     func calculate(with repos: [Repository]) {
         let slimRepos = repos.flatMap({ (repo) -> SlimRepository? in
-            guard let name = repo[GFConstants.repoName] as? String else {
+            guard let name = repo[GFJSONConstants.repoName] as? String else {
                 return nil
             }
 
-            guard let stars = repo[GFConstants.repoStarCount] as? Int else {
+            guard let stars = repo[GFJSONConstants.repoStarCount] as? Int else {
                 return nil
             }
 
-            guard let forks = repo[GFConstants.repoForkCount] as? Int else {
+            guard let forks = repo[GFJSONConstants.repoForkCount] as? Int else {
                 return nil
             }
 
@@ -115,7 +115,7 @@ private extension GitFame {
         let stars = slimRepos.flatMap({ $0.stars }).reduce(0, +)
         let forks = slimRepos.flatMap({ $0.forks }).reduce(0, +)
 
-        print("\(username) has \(stars) \(GFConstants.starUnicode) and \(forks) \(GFConstants.forkUnicode)\n")
+        print("\(GFColorConstants.blue)\(username)\(GFColorConstants.close) has \(stars) \(GFColorConstants.yellow)\(GFGeneralConstants.starUnicode)\(GFColorConstants.close) and \(forks) \(GFColorConstants.green)\(GFGeneralConstants.forkUnicode)\(GFColorConstants.close)\n")
 
         printAll(using: slimRepos)
 
@@ -139,7 +139,7 @@ private extension GitFame {
         for repo in repos {
             var name = repo.name
             repeat { name.insert(" ", at: name.endIndex) } while name.characters.count < length + 10
-            print("\(name)\(repo.stars) \(GFConstants.starUnicode) / \(repo.forks) \(GFConstants.forkUnicode)")
+            print("\(GFColorConstants.red)\(name)\(GFColorConstants.close) \(repo.stars) \(GFColorConstants.yellow)\(GFGeneralConstants.starUnicode)\(GFColorConstants.close) / \(repo.forks) \(GFColorConstants.green)\(GFGeneralConstants.forkUnicode)\(GFColorConstants.close)")
         }
     }
 }
@@ -172,13 +172,31 @@ fileprivate enum GFError: Error {
     }
 }
 
-fileprivate struct GFConstants {
+// MARK: - General Constans
+
+fileprivate struct GFGeneralConstants {
     static let starUnicode = "\u{2605}"
     static let forkUnicode = "\u{2442}"
+}
+
+// MARK: - JSON Constants
+
+fileprivate struct GFJSONConstants {
     static let publicRepos = "public_repos"
+    static let repoForkCount = "forks_count"
     static let repoName = "name"
     static let repoStarCount = "stargazers_count"
-    static let repoForkCount = "forks_count"
+}
+
+// MARK: - Color Constans (w/built-in escapes; \u{001B})
+
+fileprivate struct GFColorConstants {
+    static let blue = "\u{001B}[34m"
+    static let close = "\u{001B}[0m"
+    static let cyan = "\u{001B}[36m"
+    static let green = "\u{001B}[32m"
+    static let red = "\u{001B}[31m"
+    static let yellow = "\u{001B}[33m"
 }
 
 // MARK: - Program Entry
