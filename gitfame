@@ -130,15 +130,15 @@ private extension GitFame {
     }
 
     func printAll(using repos: [SlimRepository]) {
-        let sortedRepos = repos.sorted(by: { $0.name.characters.count > $1.name.characters.count })
+        let sortedRepos = repos.sorted(by: { $0.name.count > $1.name.count })
 
-        guard let length = sortedRepos.first?.name.characters.count else {
+        guard let length = sortedRepos.first?.name.count else {
             return
         }
 
         for repo in repos {
             var name = repo.name
-            repeat { name.insert(" ", at: name.endIndex) } while name.characters.count < length + 10
+            repeat { name.insert(" ", at: name.endIndex) } while name.count < length + 10
             print("\(GFColorConstants.red)\(name)\(GFColorConstants.close) \(repo.stars) \(GFColorConstants.yellow)\(GFGeneralConstants.starUnicode)\(GFColorConstants.close) / \(repo.forks) \(GFColorConstants.green)\(GFGeneralConstants.forkUnicode)\(GFColorConstants.close)")
         }
     }
