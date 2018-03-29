@@ -94,7 +94,7 @@ private extension GitFame {
     }
 
     func calculate(with repos: [Repository]) {
-        let slimRepos = repos.flatMap({ (repo) -> SlimRepository? in
+        let slimRepos = repos.compactMap({ (repo) -> SlimRepository? in
             guard let name = repo[GFJSONConstants.repoName] as? String else {
                 return nil
             }
@@ -112,8 +112,8 @@ private extension GitFame {
             $0.stars > $1.stars
         }
 
-        let stars = slimRepos.flatMap({ $0.stars }).reduce(0, +)
-        let forks = slimRepos.flatMap({ $0.forks }).reduce(0, +)
+        let stars = slimRepos.compactMap({ $0.stars }).reduce(0, +)
+        let forks = slimRepos.compactMap({ $0.forks }).reduce(0, +)
 
         print("\(GFColorConstants.blue)\(username)\(GFColorConstants.close) has \(stars) \(GFColorConstants.yellow)\(GFGeneralConstants.starUnicode)\(GFColorConstants.close) and \(forks) \(GFColorConstants.green)\(GFGeneralConstants.forkUnicode)\(GFColorConstants.close)\n")
 
