@@ -57,12 +57,11 @@ private extension GitFame {
             }
 
             guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                let repos = json,
-                let repCount = repos[GFJSONConstants.publicRepos] as? Int else {
+                let jsonCount = json[GFJSONConstants.publicRepos] as? Int else {
                 return GFError.log(error: .MalformedJSON(urlString: urlString))
             }
 
-            handler(repCount)
+            handler(jsonCount)
         }.resume()
         GFSemaphore.wait()
     }
@@ -84,12 +83,11 @@ private extension GitFame {
                 return GFError.log(error: .MissingJSON(urlString: urlString))
             }
 
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [Repository],
-                let repos = json else {
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [Repository] else {
                     return GFError.log(error: .MalformedJSON(urlString: urlString))
             }
 
-            handler(repos)
+            handler(json)
         }.resume()
     }
 
